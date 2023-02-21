@@ -6,6 +6,9 @@ import ReactMarkdown from "react-markdown";
 import { Link, useParams } from "react-router-dom";
 
 import styles from "./Repository.module.scss";
+import eye from "../../assets/eye.png";
+import fork from "../../assets/fork.png";
+import star from "../../assets/star.png";
 
 type Repo = {
   full_name: string;
@@ -13,6 +16,7 @@ type Repo = {
   html_url: string;
   stargazers_count: number;
   watchers_count: number;
+  forks_count: number;
 };
 
 function Repository() {
@@ -25,6 +29,7 @@ function Repository() {
     html_url: "",
     stargazers_count: 0,
     watchers_count: 0,
+    forks_count: 0,
   });
   const [readme, setReadme] = useState<any>();
 
@@ -55,8 +60,17 @@ function Repository() {
             <Link to={repo.html_url}>{repo.full_name}</Link>
           </p>
           <p>{repo.description}</p>
-          <p>{repo.stargazers_count} stars</p>
-          <p>{repo.watchers_count} watching</p>
+          <div className={styles.counters}>
+            <li>
+              <img src={star} alt="star" /> {repo.stargazers_count} stars
+            </li>
+            <li>
+              <img src={eye} alt="eye" /> {repo.watchers_count} watching
+            </li>
+            <li>
+              <img src={fork} alt="fork" /> {repo.forks_count} forks
+            </li>
+          </div>
           <div className={styles.readme}>
             <h4>README.md</h4>
             <ReactMarkdown>{readme}</ReactMarkdown>

@@ -1,14 +1,35 @@
 @use "@styles/var";
 
 .repository {
-    color: #{var.$primary-color};
+    color: #{var.$default-color};
     margin-top: 20px;
 }
 
+.repository a {
+    color: #{var.$link-color};
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.counters {
+    color: #{var.$primary-color};
+}
+
+.counters li {
+    list-style: none;
+    margin-bottom: 8px;
+}
+
+.counters img {
+    width: 15px;
+    height: 15px;
+}
+
 .readme {
-    color: #{var.$default-color};
     @include var.border;
     font-size: 14px;
+    margin-top: 20px;
     padding: 0 15px;
-    word-wrap: break-word;
+    width: fit-content;
+    min-width: 500px;
 }
