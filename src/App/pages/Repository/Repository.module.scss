@@ -1,3 +1,14 @@
+@use "@styles/var";
+
 .repository {
-    color:darkslategrey;
+    color: #{var.$primary-color};
+    margin-top: 20px;
+}
+
+.readme {
+    color: #{var.$default-color};
+    @include var.border;
+    font-size: 14px;
+    padding: 0 15px;
+    word-wrap: break-word;
 }

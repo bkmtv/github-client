@@ -1,3 +1,5 @@
+@use "@styles/var";
+
 .footer {
-    color:gray;
+    color: #{var.$secondary-color};
 }

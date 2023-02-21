@@ -1,3 +1,5 @@
+@use "@styles/var";
+
 .header h2 {
-    color:darkorange;
+    color: #{var.$accent-color};
 }

@@ -1,3 +1,5 @@
+@use "@styles/var";
+
 .repos {
-    color:darkslategrey;
+    color: #{var.$primary-color};
 }

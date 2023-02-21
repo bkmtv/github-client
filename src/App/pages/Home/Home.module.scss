@@ -1,3 +1,5 @@
+@use "@styles/var";
+
 .home {
-    color:darkslategrey;
+    color: #{var.$primary-color};
 }
