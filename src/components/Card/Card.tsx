@@ -4,7 +4,8 @@ export type CardProps = {
   image: string;
   title: React.ReactNode;
   subtitle: React.ReactNode;
-  content?: React.ReactNode;
+  stars?: React.ReactNode;
+  updated?: React.ReactNode;
   onClick?: React.MouseEventHandler;
 };
 
@@ -12,7 +13,8 @@ export const Card = ({
   image,
   title,
   subtitle,
-  content,
+  stars,
+  updated,
   onClick,
 }: CardProps) => {
   return (
@@ -21,7 +23,10 @@ export const Card = ({
       <div className={styles.wrapper}>
         <div className={styles.title}>{title}</div>
         <div className={styles.subtitle}>{subtitle}</div>
-        <div className={styles.content}>{content}</div>
+        <div className={styles.content}>
+          <div>Stars {stars}</div>
+          <div>Updated {updated}</div>
+        </div>
       </div>
     </div>
   );

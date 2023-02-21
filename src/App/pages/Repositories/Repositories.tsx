@@ -10,7 +10,8 @@ type Repo = {
   image: string;
   title: string;
   subtitle: string;
-  content: string;
+  stars: number;
+  updated: string;
 };
 
 function Repositories() {
@@ -26,7 +27,8 @@ function Repositories() {
             image: repo.owner.avatar_url,
             title: repo.name,
             subtitle: repo.owner.login,
-            content: repo.stargazers_count,
+            stars: repo.stargazers_count,
+            updated: repo.updated_at,
           }))
         );
       });
@@ -41,7 +43,8 @@ function Repositories() {
           image={repo.image}
           title={repo.title}
           subtitle={repo.subtitle}
-          content={repo.content}
+          stars={repo.stars}
+          updated={repo.updated}
           onClick={() => {
             navigate(`/repos/${repo.title}`);
           }}
