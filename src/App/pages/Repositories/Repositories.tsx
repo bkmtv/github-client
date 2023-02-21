@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { Card } from "@components/Card";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./Repositories.module.scss";
 
@@ -9,9 +10,11 @@ type Repo = {
   image: string;
   title: string;
   subtitle: string;
+  content: string;
 };
 
 function Repositories() {
+  const navigate = useNavigate();
   const [repos, setRepos] = useState<Repo[]>([]);
 
   useEffect(() => {
@@ -23,6 +26,7 @@ function Repositories() {
             image: repo.owner.avatar_url,
             title: repo.name,
             subtitle: repo.owner.login,
+            content: repo.stargazers_count,
           }))
         );
       });
@@ -37,6 +41,10 @@ function Repositories() {
           image={repo.image}
           title={repo.title}
           subtitle={repo.subtitle}
+          content={repo.content}
+          onClick={() => {
+            navigate(`/repos/${repo.title}`);
+          }}
         />
       ))}
     </main>
