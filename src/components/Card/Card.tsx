@@ -1,5 +1,5 @@
+import star from "./assets/star.png";
 import styles from "./Card.module.scss";
-import star from "../../App/assets/star.png";
 
 export type CardProps = {
   image: string;
