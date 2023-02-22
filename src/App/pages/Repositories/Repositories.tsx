@@ -50,7 +50,7 @@ function Repositories() {
               title={repo.title}
               subtitle={repo.subtitle}
               stars={repo.stars}
-              updated={repo.updated}
+              updated={repo.updated.slice(0, 10)}
               onClick={() => {
                 navigate(`/repos/${repo.title}`);
               }}
