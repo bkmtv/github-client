@@ -1,5 +1,5 @@
 {
-  "name": "gihub-client",
+  "name": "github-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
