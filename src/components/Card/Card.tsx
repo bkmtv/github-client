@@ -10,14 +10,14 @@ export type CardProps = {
   onClick?: React.MouseEventHandler;
 };
 
-export const Card = ({
+export function Card({
   image,
   title,
   subtitle,
   stars,
   updated,
   onClick,
-}: CardProps) => {
+}: CardProps) {
   return (
     <div className={styles.card} onClick={onClick}>
       <img src={image} className={styles.img} alt="img" />
@@ -33,4 +33,4 @@ export const Card = ({
       </div>
     </div>
   );
-};
+}

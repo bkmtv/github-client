@@ -1,12 +1,13 @@
 @use "@styles/var";
+@use "@styles/mixin";
 
 .repository {
-    color: #{var.$default-color};
+    color: var.$default-color;
     margin-top: 20px;
 }
 
 .repository a {
-    color: #{var.$link-color};
+    color: var.$link-color;
     text-decoration: none;
     font-weight: 700;
 }
@@ -45,16 +46,16 @@
     list-style: none;
     padding: 4px 16px;
     height: 22px;
-    background: #DAEDFF;
+    background: var.$topic-bg;
+    color: var.$topic-color;
     border-radius: 20px;
-    color: #0066CC;
     font-weight: 700;
     font-size: 12px;
     line-height: 20px;
 }
 
 .counters {
-    color: #{var.$primary-color};
+    color: var.$primary-color;
 }
 
 .counters li {
@@ -64,8 +65,8 @@
 }
 
 .readme {
-    @include var.border;
-    font-size: 14px;
+    @include mixin.border;
+    @include mixin.text-s;
     margin-top: 20px;
     padding: 0 15px;
     width: fit-content;

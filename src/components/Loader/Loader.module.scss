@@ -1,5 +1,7 @@
+@use "@styles/var";
+
 .loader {
-    border: 4.5px solid #ff5555;
+    border: 4.5px solid var.$accent-color;
     border-bottom-color: transparent;
     border-radius: 50%;
     box-sizing: border-box;

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 
 import { Loader } from "@components/Loader";
+import { getRepoUrl, getReadmeUrl } from "@config/urls";
+import type { RepoPage } from "@types";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -12,52 +14,43 @@ import link from "./assets/link.png";
 import star from "./assets/star.png";
 import styles from "./Repository.module.scss";
 
-type Repo = {
-  full_name: string;
-  description: string;
-  html_url: string;
-  stargazers_count: number;
-  watchers_count: number;
-  forks_count: number;
-  topics: string[];
-};
-
 function Repository() {
-  let { title } = useParams();
+  const { title } = useParams<string>();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
-  const [repo, setRepo] = useState<Repo>({
-    full_name: "",
-    description: "",
-    html_url: "",
-    stargazers_count: 0,
-    watchers_count: 0,
-    forks_count: 0,
-    topics: [],
-  });
-  const [readme, setReadme] = useState<any>();
+  const [repo, setRepo] = useState<RepoPage | null>(null);
+  const [readme, setReadme] = useState<string | null>(null);
 
   useEffect(() => {
-    axios
-      .get(`https://api.github.com/repos/ktsstudio/${title}`)
-      .then((response) => {
-        setLoading(false);
+    Promise.all([
+      axios.get(getRepoUrl(title!)).then((response) => {
         setRepo(response.data);
-      });
-    axios
-      .get(
-        `https://raw.githubusercontent.com/ktsstudio/${title}/master/README.md`
-      )
-      .then((response) => {
-        setLoading(false);
-        setReadme(response.data);
-      });
+      }),
+      axios
+        .get(getReadmeUrl(title!), {
+          validateStatus: function (status) {
+            return status < 500;
+          },
+        })
+        .then((response) => {
+          setReadme(response.data);
+        }),
+    ]).then(() => {
+      setLoading(false);
+    });
   }, [title]);
+
+  if (loading) {
+    return <Loader loading={loading} />;
+  }
+
+  if (!repo || !readme) {
+    return <div className={styles.repository}>Произошла ошибка</div>;
+  }
 
   return (
     <main className={styles.repository}>
-      <Loader loading={loading} />
       {!loading && (
         <>
           <div className={styles.title}>
@@ -82,21 +75,25 @@ function Repository() {
           <p>{repo.description}</p>
           <div className={styles.counters}>
             <li>
-              <img src={star} className={styles.image} alt="star" />{" "}
+              <img src={star} className={styles.image} alt="star" />
               {repo.stargazers_count} stars
             </li>
             <li>
-              <img src={eye} className={styles.image} alt="eye" />{" "}
+              <img src={eye} className={styles.image} alt="eye" />
               {repo.watchers_count} watching
             </li>
             <li>
-              <img src={fork} className={styles.image} alt="fork" />{" "}
+              <img src={fork} className={styles.image} alt="fork" />
               {repo.forks_count} forks
             </li>
           </div>
           <div className={styles.readme}>
             <h4>README.md</h4>
-            <ReactMarkdown>{readme}</ReactMarkdown>
+            {readme === "404: Not Found" ? (
+              <p>README.md отсутствует</p>
+            ) : (
+              <ReactMarkdown>{readme}</ReactMarkdown>
+            )}
           </div>
         </>
       )}

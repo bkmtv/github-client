@@ -2,34 +2,30 @@ import { useEffect, useState } from "react";
 
 import { Card } from "@components/Card";
 import { Loader } from "@components/Loader";
+import { getReposUrl } from "@config/urls";
+import type { Repo } from "@types";
+import { normalizeRepo } from "@utils/normalizeRepo";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./Repositories.module.scss";
 
-type Repo = {
-  image: string;
-  title: string;
-  subtitle: string;
-  stars: number;
-  updated: string;
-};
+const REPOS_PER_PAGE = 10;
 
 function Repositories() {
   const navigate = useNavigate();
   const [pageNumber, setPageNumber] = useState(0);
-  const reposPerPage = 10;
-  const pagesVisited = pageNumber * reposPerPage;
+  const pagesVisited = pageNumber * REPOS_PER_PAGE;
   const [repos, setRepos] = useState<Repo[]>([]);
   const [loading, setLoading] = useState(true);
 
   const displayRepos = repos
-    .slice(pagesVisited, pagesVisited + reposPerPage)
-    .map((repo, key) => {
+    .slice(pagesVisited, pagesVisited + REPOS_PER_PAGE)
+    .map((repo) => {
       return (
         <Card
-          key={key}
+          key={repo.id}
           image={repo.image}
           title={repo.title}
           subtitle={repo.subtitle}
@@ -42,26 +38,16 @@ function Repositories() {
       );
     });
 
-  const pageCount = Math.ceil(repos.length / reposPerPage);
-  const changePage = ({ selected }: any) => {
+  const pageCount = Math.ceil(repos.length / REPOS_PER_PAGE);
+  const changePage = ({ selected }: { selected: number }) => {
     setPageNumber(selected);
   };
 
   useEffect(() => {
-    axios
-      .get("https://api.github.com/orgs/ktsstudio/repos")
-      .then((response) => {
-        setLoading(false);
-        setRepos(
-          response.data.map((repo: any) => ({
-            image: repo.owner.avatar_url,
-            title: repo.name,
-            subtitle: repo.owner.login,
-            stars: repo.stargazers_count,
-            updated: repo.updated_at,
-          }))
-        );
-      });
+    axios.get(getReposUrl()).then((response) => {
+      setLoading(false);
+      setRepos(response.data.map(normalizeRepo));
+    });
   }, []);
 
   return (
@@ -75,12 +61,12 @@ function Repositories() {
             nextLabel={"Next >"}
             pageCount={pageCount}
             onPageChange={changePage}
-            containerClassName={styles.page_btns}
-            previousLinkClassName={styles.prev_btn}
-            nextLinkClassName={styles.next_btn}
-            disabledClassName={styles.page_disabled}
-            activeClassName={styles.active_btn}
-          ></ReactPaginate>
+            containerClassName={styles.btns}
+            previousLinkClassName={styles.prev}
+            nextLinkClassName={styles.next}
+            disabledClassName={styles.disabled}
+            activeClassName={styles.active}
+          />
           {displayRepos}
         </>
       )}

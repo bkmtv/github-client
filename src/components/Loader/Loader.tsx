@@ -12,11 +12,8 @@ export type LoaderProps = {
   className?: string;
 };
 
-export const Loader = ({
-  loading = true,
-  size = LoaderSize.m,
-}: LoaderProps) => {
+export function Loader({ loading = true, size = LoaderSize.m }: LoaderProps) {
   return loading ? (
     <div className={`${styles.loader} ${styles.size_m}`}></div>
   ) : null;
-};
+}
