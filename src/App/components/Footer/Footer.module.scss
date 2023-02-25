@@ -1,0 +1,7 @@
+@use "@styles/var";
+@use "@styles/mixin";
+
+.footer {
+    color: var.$secondary-color;
+    @include mixin.text-m;
+}

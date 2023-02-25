@@ -1,0 +1,12 @@
+@use "@styles/var";
+@use "@styles/mixin";
+
+.header h2 {
+    color: var.$accent-color;
+}
+
+nav a {
+    color: var.$link-color;
+    @include mixin.text-m;
+    text-decoration: none;
+}

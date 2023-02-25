@@ -1,0 +1,74 @@
+@use "@styles/var";
+@use "@styles/mixin";
+
+.repository {
+    color: var.$default-color;
+    margin-top: 20px;
+}
+
+.repository a {
+    color: var.$link-color;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.image {
+    width: 15px;
+    height: 15px;
+    padding-right: 8px;
+}
+
+.title {
+    display: flex;
+    height: 23px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    vertical-align: middle;
+    align-items: center;
+}
+
+.title img {
+    width: 16px;
+    height: 25px;
+    margin-right: 18px;
+    cursor: pointer;
+}
+
+.topics {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.topics li {
+    list-style: none;
+    padding: 4px 16px;
+    height: 22px;
+    background: var.$topic-bg;
+    color: var.$topic-color;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.counters {
+    color: var.$primary-color;
+}
+
+.counters li {
+    list-style: none;
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+.readme {
+    @include mixin.border;
+    @include mixin.text-s;
+    margin-top: 20px;
+    padding: 0 15px;
+    width: fit-content;
+    min-width: 500px;
+}
