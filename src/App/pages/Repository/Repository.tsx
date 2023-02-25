@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Loader } from "@components/Loader";
 import { getRepoUrl, getReadmeUrl } from "@config/urls";
 import type { RepoPage } from "@types";
+import { normalizeRepoPage } from "@utils/normalizeRepo";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -25,7 +26,7 @@ function Repository() {
   useEffect(() => {
     Promise.all([
       axios.get(getRepoUrl(title!)).then((response) => {
-        setRepo(response.data);
+        setRepo(response.data.map(normalizeRepoPage));
       }),
       axios
         .get(getReadmeUrl(title!), {
@@ -61,11 +62,11 @@ function Repository() {
                 navigate(-1);
               }}
             />
-            {repo.full_name}
+            {repo.title}
           </div>
           <p>
             <img src={link} className={styles.image} alt="link" />
-            <Link to={repo.html_url}>{repo.full_name}</Link>
+            <Link to={repo.url}>{repo.title}</Link>
           </p>
           <div className={styles.topics}>
             {repo.topics.map((topic, key) => (
@@ -76,15 +77,15 @@ function Repository() {
           <div className={styles.counters}>
             <li>
               <img src={star} className={styles.image} alt="star" />
-              {repo.stargazers_count} stars
+              {repo.stars} stars
             </li>
             <li>
               <img src={eye} className={styles.image} alt="eye" />
-              {repo.watchers_count} watching
+              {repo.watchers} watching
             </li>
             <li>
               <img src={fork} className={styles.image} alt="fork" />
-              {repo.forks_count} forks
+              {repo.forks} forks
             </li>
           </div>
           <div className={styles.readme}>

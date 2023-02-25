@@ -1,3 +1,5 @@
+import classNames from "classnames";
+
 import styles from "./Loader.module.scss";
 
 export enum LoaderSize {
@@ -13,7 +15,8 @@ export type LoaderProps = {
 };
 
 export function Loader({ loading = true, size = LoaderSize.m }: LoaderProps) {
-  return loading ? (
-    <div className={`${styles.loader} ${styles.size_m}`}></div>
-  ) : null;
+  if (!loading) {
+    return null;
+  }
+  return <div className={classNames(styles.loader, styles[`size_${size}`])} />;
 }

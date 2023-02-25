@@ -18,12 +18,22 @@ export type Repo = {
   updated: string;
 };
 
-export type RepoPage = {
+export type ApiRepoPage = {
   full_name: string;
   description: string;
   html_url: string;
   stargazers_count: number;
   watchers_count: number;
   forks_count: number;
+  topics: string[];
+};
+
+export type RepoPage = {
+  title: string;
+  description: string;
+  url: string;
+  stars: number;
+  watchers: number;
+  forks: number;
   topics: string[];
 };
