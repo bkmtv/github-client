@@ -19,14 +19,13 @@ function Repository() {
   const { title } = useParams<string>();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-
   const [repo, setRepo] = useState<RepoPage | null>(null);
   const [readme, setReadme] = useState<string | null>(null);
 
   useEffect(() => {
     Promise.all([
       axios.get(getRepoUrl(title!)).then((response) => {
-        setRepo(response.data.map(normalizeRepoPage));
+        setRepo(normalizeRepoPage(response.data));
       }),
       axios
         .get(getReadmeUrl(title!), {
