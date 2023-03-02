@@ -6,7 +6,7 @@ export const normalizeRepo = (repo: ApiRepo): Repo => ({
   title: repo.name,
   subtitle: repo.owner.login,
   stars: repo.stargazers_count,
-  updated: repo.updated_at,
+  updated: new Date(repo.updated_at),
 });
 
 export const normalizeRepoPage = (repo: ApiRepoPage): RepoPage => ({

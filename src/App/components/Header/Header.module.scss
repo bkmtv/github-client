@@ -5,6 +5,10 @@
     color: var.$accent-color;
 }
 
+nav {
+    margin-bottom: 30px;
+}
+
 nav a {
     color: var.$link-color;
     @include mixin.text-m;

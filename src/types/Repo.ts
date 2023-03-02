@@ -15,7 +15,7 @@ export type Repo = {
   title: string;
   subtitle: string;
   stars: number;
-  updated: string;
+  updated: Date;
 };
 
 export type ApiRepoPage = {

@@ -10,11 +10,10 @@
     width: 342px;
     height: 89px;
     @include mixin.border;
-}
-
-.card:hover {
-    cursor: pointer;
-    box-shadow: 0px 2px 6px rgba(182, 182, 182, 0.25);
+    &:hover {
+        cursor: pointer;
+        @include mixin.shadow;
+    }
 }
 
 .img {
@@ -32,7 +31,7 @@
 
 .title {
     font-weight: 700;
-    font-size: 16px;
+    @include mixin.text-m;
 }
 
 .subtitle {

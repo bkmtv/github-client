@@ -4,8 +4,8 @@ import styles from "./App.module.scss";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Home from "./pages/Home";
-import Repositories from "./pages/Repositories";
 import Repository from "./pages/Repository";
+import Repositories from "./pages/ReposMobx";
 
 function App() {
   return (

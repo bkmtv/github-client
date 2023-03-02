@@ -1,0 +1,12 @@
+@use "@styles/var";
+@use "@styles/mixin";
+
+.input {
+    width: 340px;
+    padding: 16px 12px;
+    @include mixin.border;
+    @include mixin.text-s;
+    &:hover {
+        border: 1px solid var.$accent-color;
+    }
+}
