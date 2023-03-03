@@ -12,6 +12,7 @@ export function Input({ value, onChange, ...props }: InputProps) {
       onChange={(e) => onChange(e.target.value)}
       className={classNames(props.className, styles.input)}
       type="text"
+      placeholder="Enter organization name"
     />
   );
 }

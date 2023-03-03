@@ -1,8 +1,8 @@
-@use "@styles/var";
-@use "@styles/mixin";
+@import "@styles/var";
+@import "@styles/mixin";
 
 .footer {
     margin-top: 30px;
-    color: var.$secondary-color;
-    @include mixin.text-m;
+    color: $secondary-color;
+    @include text-m;
 }

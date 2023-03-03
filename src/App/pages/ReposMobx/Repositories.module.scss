@@ -1,8 +1,8 @@
-@use "@styles/var";
-@use "@styles/mixin";
+@import "@styles/var";
+@import "@styles/mixin";
 
 .repos {
-    color: var.$default-color;
+    color: $default-color;
 }
 
 .btns {
@@ -11,27 +11,27 @@
     list-style: none;
     gap: 5px;
     a {
-        color: var.$link-color;
-        @include mixin.text-m;
+        color: $link-color;
+        @include text-m;
         border: 1px solid transparent;
         border-radius: 6px;
         padding: 6px 12px;
         transition: border-color .2s cubic-bezier(0.3, 0, 0.5, 1);
         cursor: pointer;
         &:hover {
-            @include mixin.border;
+            @include border;
         }
     }
 }
 
 .active a {
-    color: var.$light-color;
-    background-color: var.$accent-color;
+    color: $light-color;
+    background-color: $accent-color;
     &:hover {
         border: 1px solid transparent;
     }
 }
 
 .disabled a {
-    color: var.$secondary-color;
+    color: $secondary-color;
 }

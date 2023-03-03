@@ -1,5 +1,10 @@
-@use "@styles/var";
+@import "@styles/var";
 
 .home {
-    color: var.$primary-color;
+    color: $primary-color;
+}
+
+.search {
+    display: flex;
+    align-items: center;
 }

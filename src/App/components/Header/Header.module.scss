@@ -1,8 +1,8 @@
-@use "@styles/var";
-@use "@styles/mixin";
+@import "@styles/var";
+@import "@styles/mixin";
 
 .header h2 {
-    color: var.$accent-color;
+    color: $accent-color;
 }
 
 nav {
@@ -10,7 +10,7 @@ nav {
 }
 
 nav a {
-    color: var.$link-color;
-    @include mixin.text-m;
+    color: $link-color;
+    @include text-m;
     text-decoration: none;
 }
