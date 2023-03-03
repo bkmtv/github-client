@@ -24,11 +24,11 @@ function Repository() {
 
   useEffect(() => {
     Promise.all([
-      axios.get(getRepoUrl(title!)).then((response) => {
+      axios.get(getRepoUrl("ktsstudio", title!)).then((response) => {
         setRepo(normalizeRepoPage(response.data));
       }),
       axios
-        .get(getReadmeUrl(title!), {
+        .get(getReadmeUrl("ktsstudio", title!), {
           validateStatus: function (status) {
             return status < 500;
           },

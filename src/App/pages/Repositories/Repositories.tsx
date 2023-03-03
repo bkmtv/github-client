@@ -43,7 +43,7 @@ function Repositories() {
   };
 
   useEffect(() => {
-    axios.get(getReposUrl()).then((response) => {
+    axios.get(getReposUrl("ktsstudio")).then((response) => {
       setLoading(false);
       setRepos(response.data.map(normalizeRepo));
     });
