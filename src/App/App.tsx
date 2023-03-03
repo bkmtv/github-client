@@ -1,3 +1,4 @@
+import { useQueryParamsStoreInit } from "@store/RootStore/useQueryParamsStoreInit";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import styles from "./App.module.scss";
@@ -8,6 +9,7 @@ import Repository from "./pages/Repository";
 import Repositories from "./pages/ReposMobx";
 
 function App() {
+  useQueryParamsStoreInit();
   return (
     <BrowserRouter>
       <div className={styles.app}>
