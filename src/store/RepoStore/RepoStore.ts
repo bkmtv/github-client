@@ -38,20 +38,17 @@ export class RepoStore {
   async getRepoPage(): Promise<void> {
     try {
       this._meta = Meta.loading;
-      this._repoPage = [];
-      const response = await axios.get(getRepoUrl("", ""));
+      const response = await axios.get(getRepoUrl());
       runInAction(() => {
         this._meta = Meta.success;
         this._repoPage = response.data.map(normalizeRepoPage);
       });
     } catch (error) {
       this._meta = Meta.error;
-      this._repoPage = [];
     }
   }
 
   destroy(): void {
     this._meta = Meta.initial;
-    this._repoPage = [];
   }
 }
