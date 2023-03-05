@@ -8,9 +8,12 @@ export type ButtonProps = React.PropsWithChildren<{
 }> &
   React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export function Button({ children, disabled }: ButtonProps) {
+export function Button({ children, disabled, ...props }: ButtonProps) {
   return (
-    <button className={classNames(styles.button, disabled && styles.disabled)}>
+    <button
+      {...props}
+      className={classNames(styles.button, disabled && styles.disabled)}
+    >
       <img src={search} alt="search" />
       {children}
     </button>

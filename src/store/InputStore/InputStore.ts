@@ -2,12 +2,9 @@ import { ILocalStore } from "@utils/useLocal";
 import { action, computed, makeObservable, observable } from "mobx";
 
 type PrivateFields = "_value";
+
 export default class InputStore implements ILocalStore {
   private _value: string = "";
-
-  get value(): string {
-    return this._value;
-  }
 
   constructor() {
     makeObservable<InputStore, PrivateFields>(this, {
@@ -15,6 +12,10 @@ export default class InputStore implements ILocalStore {
       value: computed,
       setValue: action,
     });
+  }
+
+  get value(): string {
+    return this._value;
   }
 
   setValue(newValue: string): void {

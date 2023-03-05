@@ -1,4 +1,5 @@
 import { getReposUrl } from "@config/urls";
+import InputStore from "@store/InputStore/InputStore";
 import { Repo } from "@types";
 import { Meta } from "@utils/meta";
 import { normalizeRepo } from "@utils/normalizeRepo";
@@ -11,24 +12,19 @@ import {
   runInAction,
 } from "mobx";
 
-import InputStore from "./InputStore/InputStore";
-
-export type PrivateFields = "_repos" | "_reposPage" | "_meta";
+export type PrivateFields = "_repos" | "_meta";
 
 export class ReposStore {
   private _meta: Meta = Meta.initial;
   private _repos: Repo[] = [];
-  private _reposPage: number = 0;
   private _input: InputStore = new InputStore();
 
   constructor() {
     makeObservable<ReposStore, PrivateFields>(this, {
       _meta: observable,
       _repos: observable.ref,
-      _reposPage: observable,
       meta: computed,
       repos: computed,
-      reposPage: computed,
       getRepos: action,
     });
   }
@@ -41,16 +37,8 @@ export class ReposStore {
     return this._repos;
   }
 
-  get reposPage(): number {
-    return this._reposPage;
-  }
-
   get input(): InputStore {
     return this._input;
-  }
-
-  set reposPage(value: number) {
-    this._reposPage = value;
   }
 
   async getRepos(): Promise<void> {
